@@ -8,9 +8,11 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     Button startButton, stopButton;
+    TextView Status_true, Status_false;
     static Context context;
     boolean isPlaying;
     Intent streamService;
@@ -23,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
         context = this;
         startButton = (Button) findViewById(R.id.startButton);
         stopButton = (Button) findViewById(R.id.stopButton);
+        Status_true = (TextView)findViewById(R.id.Service_Status_true);
+        Status_false = (TextView)findViewById(R.id.Service_Status_false);
+
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
         getPrefs();
         streamService = new Intent(MainActivity.this, StreamService.class);
@@ -34,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 startService(streamService);
                 startButton.setEnabled(false);
+                Status_true.setText("True");
+                Status_false.setText("");
             }
         });
 
@@ -44,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 stopService(streamService);
                 startButton.setEnabled(true);
+                Status_true.setText("");
+                Status_false.setText("False");
             }
         });
     }

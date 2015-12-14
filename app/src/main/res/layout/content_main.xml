@@ -11,7 +11,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:layout_marginTop="50dp" >
+        android:layout_marginTop="100dp" >
 
         <Button
             android:id="@+id/startButton"
@@ -27,5 +27,37 @@
             android:layout_weight="1"
             android:text="@string/stop" />
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Tx1"
+            android:text="Service Status:"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/Service_Status_true"
+            android:textColor="#00ff19"
+            android:text=""
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/Service_Status_false"
+            android:textColor="#ff0000"
+            android:text=""
+            />
+    </LinearLayout>
+
+
 
 </RelativeLayout>
