@@ -9,17 +9,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
+
+import java.util.concurrent.TimeUnit;
 
 
 public class MainActivity extends AppCompatActivity {
     Button startButton, stopButton;
     TextView Status_true, Status_false,countdown_txt;
+    private TimePicker timePicker;
     static Context context;
     boolean isPlaying;
     Intent streamService;
     SharedPreferences prefs;
-
-
+    long time;
+    TimerForService TFS;
+    private int hours,minutes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         Status_true = (TextView)findViewById(R.id.Service_Status_true);
         Status_false = (TextView)findViewById(R.id.Service_Status_false);
         countdown_txt = (TextView)findViewById(R.id.countdown_txt);
+        timePicker = (TimePicker)findViewById(R.id.timePicker);
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
         getPrefs();
 
@@ -44,10 +51,16 @@ public class MainActivity extends AppCompatActivity {
         /*
         Declare Countdown
          */
-        long time = 10000;
+        timePicker.setIs24HourView(true);
 
-        final TimerForService TFS = new TimerForService(getApplicationContext(),countdown_txt
-                ,time,streamService);
+        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                hours = hourOfDay;
+                minutes = minute;
+
+            }
+        });
 
 
 
@@ -59,7 +72,11 @@ public class MainActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 startService(streamService);
                 startButton.setEnabled(false);
-                long time = 30000;
+                time = TimeUnit.HOURS.toMillis(Long.valueOf(String.valueOf(hours)))+
+                        TimeUnit.MINUTES.toMillis(Long.valueOf(String.valueOf(minutes)));
+                Toast.makeText(MainActivity.this,String.valueOf(time), Toast.LENGTH_SHORT).show();
+                TFS = new TimerForService(getApplicationContext(),countdown_txt
+                        ,time,streamService);
                 TFS.Start();
                 Status_true.setText("True");
                 Status_false.setText("");

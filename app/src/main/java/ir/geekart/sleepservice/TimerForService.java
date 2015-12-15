@@ -14,8 +14,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class TimerForService {
 
-   private static SimpleDateFormat Time_Format = new SimpleDateFormat("HH:mm:ss");
-   private static Long countDown_Time ;
+    private static SimpleDateFormat Time_Format = new SimpleDateFormat("HH:mm:ss");
+    private static Long countDown_Time;
     private static TextView textView;
     private static Date Time_Remaining;
     private static Intent ServiceToStop;
@@ -40,9 +40,13 @@ public class TimerForService {
             countDownTimer = new CountDownTimer(getCountDown_Time(),100) {
                 @Override
                 public void onTick(long millisUntilFinished) {
-                    Time_Remaining.setHours((int) TimeUnit.MILLISECONDS.toHours(millisUntilFinished));
-                    Time_Remaining.setMinutes((int) TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished));
-                    Time_Remaining.setSeconds((int) TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished));
+                    long hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished);
+                    long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished-hours*3600*1000);
+                    long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished-
+                            (minutes*60*1000 + hours*3600*1000));
+                    Time_Remaining.setHours((int) hours);
+                    Time_Remaining.setMinutes((int)minutes);
+                    Time_Remaining.setSeconds((int) seconds);
                     getTextView().setText(Time_Format.format(Time_Remaining));
                 }
 
