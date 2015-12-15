@@ -34,7 +34,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp">
+        android:layout_marginTop="36dp"
+        android:id="@+id/linearLayout">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,6 +59,12 @@
             />
     </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/countdown_txt"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
