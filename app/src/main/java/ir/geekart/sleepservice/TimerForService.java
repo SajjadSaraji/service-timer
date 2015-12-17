@@ -52,6 +52,7 @@ public class TimerForService {
 
                 @Override
                 public void onFinish() {
+
                     getTextView().setText("");
                     getContext().stopService(getServiceToStop());
                 }

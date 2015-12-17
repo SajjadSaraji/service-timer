@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 startService(streamService);
                 startButton.setEnabled(false);
+                stopButton.setEnabled(true);
                 time = TimeUnit.HOURS.toMillis(Long.valueOf(String.valueOf(hours)))+
                         TimeUnit.MINUTES.toMillis(Long.valueOf(String.valueOf(minutes)));
                 Toast.makeText(MainActivity.this,String.valueOf(time), Toast.LENGTH_SHORT).show();
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 stopService(streamService);
                 startButton.setEnabled(true);
+                stopButton.setEnabled(false);
                 Status_true.setText("");
                 Status_false.setText("False");
                 TFS.Stop();
